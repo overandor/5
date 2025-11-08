@@ -1,0 +1,15 @@
+[programs.localnet]
+liquidity_manager = "Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkgc2s7Aq5MEo"
+
+[registry]
+url = "https://anchor.projectserum.com"
+
+[provider]
+cluster = "localnet"
+wallet = "~/.config/solana/id.json"
+
+[scripts]
+test = "yarn mocha -t 1000000 tests/**/*.ts"
+
+[toolchain]
+anchor_version = "0.30.1"

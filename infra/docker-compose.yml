@@ -1,0 +1,11 @@
+version: "3.8"
+services:
+  anvil:
+    image: ghcr.io/foundry-rs/foundry:latest
+    command: anvil --block-time 2
+    ports: ["8545:8545"]
+
+  solana:
+    image: solanalabs/solana:v1.18.18
+    command: solana-test-validator --reset --quiet
+    ports: ["8899:8899","8900:8900"]

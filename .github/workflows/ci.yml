@@ -1,0 +1,38 @@
+name: ci
+on:
+  push: { branches: ["main"] }
+  pull_request: { branches: ["main"] }
+
+jobs:
+  foundry:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with: { version: nightly }
+      - name: Forge deps
+        run: |
+          cd l2_foundry
+          forge install OpenZeppelin/openzeppelin-contracts@v5.0.2 --no-commit
+      - name: Forge test
+        run: |
+          cd l2_foundry
+          forge test -vv
+
+  anchor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+      - name: Install Solana
+        run: sh -c "$(curl -sSfL https://release.solana.com/stable/install)"
+      - name: Install Anchor
+        run: cargo install --git https://github.com/coral-xyz/anchor avm --locked && avm install latest && avm use latest
+      - name: Anchor build & test
+        run: |
+          export PATH="$HOME/.local/share/solana/install/active_release/bin:$PATH"
+          cd solana_anchor
+          anchor build
+          anchor test

@@ -1,0 +1,25 @@
+# Node / TS
+node_modules
+.yarn
+dist
+*.tsbuildinfo
+
+# Rust / Anchor
+target
+**/target
+Cargo.lock
+Anchor.toml.local
+
+# Foundry
+l2_foundry/lib
+l2_foundry/out
+l2_foundry/cache
+*.ds.json
+
+# Python infra
+__pycache__
+
+# Secrets
+*.env
+.env.*
+.DS_Store
